@@ -6,8 +6,8 @@
 		string Name { get; set; }
 		string CurrentValue { get; set; }
 		List<ISensorAction> Actions { get; set; }
-		DateTime LastTriggered { get; set; }
-		int LastTriggeredId { get; set; }
+		DateTime LastTriggeredTime { get; set; }
+		ISensorAction LastTriggeredAction { get; set; }
 		SensorType Type { get; set; }
 		string Description { get; set; }
 

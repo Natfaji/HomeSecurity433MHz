@@ -6,6 +6,7 @@
 		string Code { get; set; }
 		string Value { get; set; }
 		string Message { get; set; }
+		string ImageName { get; set; }
 
 		public void Trigger();
 
