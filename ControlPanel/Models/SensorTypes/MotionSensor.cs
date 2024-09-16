@@ -7,6 +7,8 @@
         public MotionSensor(string name, SensorType type, string description, int resetAfterSeconds) : base(name, type, description)
         {
             ResetAfterSeconds = resetAfterSeconds;
+
+            CurrentValue = "No movement";
         }
 
         // TODO: reset state after seconds

@@ -1,15 +1,52 @@
 ﻿using ControlPanel.Models.Interfaces;
+using System.ComponentModel;
 
 namespace ControlPanel.Models
 {
-	public abstract class Sensor : ISensor
+	public abstract class Sensor : ISensor, INotifyPropertyChanged
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public string CurrentValue { get; set; }
+		private string _currentValue { get; set; }
+		public string CurrentValue
+		{
+			get => _currentValue;
+			set
+			{
+				if (_currentValue != value)
+				{
+					_currentValue = value;
+					OnPropertyChanged(nameof(CurrentValue));
+				}
+			}
+		}
 		public List<ISensorAction> Actions { get; set; }
-		public DateTime LastTriggered { get; set; }
-		public int LastTriggeredId { get; set; }
+		private DateTime _lastTriggeredTime { get; set; }
+		public DateTime LastTriggeredTime
+		{
+			get => _lastTriggeredTime;
+			set
+			{
+				if (_lastTriggeredTime != value)
+				{
+					_lastTriggeredTime = value;
+					OnPropertyChanged(nameof(LastTriggeredTime));
+				}
+			}
+		}
+		private ISensorAction _lastTriggeredAction { get; set; }
+		public ISensorAction LastTriggeredAction
+		{
+			get => _lastTriggeredAction;
+			set
+			{
+				if (_lastTriggeredAction != value)
+				{
+					_lastTriggeredAction = value;
+					OnPropertyChanged(nameof(LastTriggeredAction));
+				}
+			}
+		}
 		public SensorType Type { get; set; }
 		public string Description { get; set; }
 
@@ -25,7 +62,16 @@ namespace ControlPanel.Models
 		//Add Trigger method
 		public virtual void Trigger(string code)
 		{
-			Actions.FirstOrDefault(a => a.Code == code)?.Trigger();
+			int index = Actions.FindIndex(a => a.Code == code);
+
+			if (index != -1)
+			{
+				ISensorAction sensorAction = Actions[index];
+				sensorAction.Trigger();
+				CurrentValue = sensorAction.Value;
+				LastTriggeredTime = DateTime.Now;
+				LastTriggeredAction = Actions[index];
+			}
 		}
 
 		public void AddSensorAction(ISensorAction action)
@@ -41,6 +87,13 @@ namespace ControlPanel.Models
 		public void UpdateSensorAction(ISensorAction action)
 		{
 			throw new NotImplementedException();
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

@@ -4,6 +4,7 @@
     {
         public DoorSensor(string name, SensorType type, string description) : base(name, type, description)
         {
+            CurrentValue = "Open";
         }
     }
 }

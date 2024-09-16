@@ -9,13 +9,19 @@ namespace ControlPanel.Models
 		public string Code { get; set; }
 		public string Value { get; set; }
 		public string Message { get; set; }
+		public string ImageName { get; set; }
 
-		public SensorAction(string name, string code, string value, string message)
+		//public SensorAction(string name, string code, string value, string message)
+		//{
+		//	Name = name ?? throw new ArgumentNullException(nameof(name));
+		//	Code = code ?? throw new ArgumentNullException(nameof(code));
+		//	Value = value ?? throw new ArgumentNullException(nameof(value));
+		//	Message = message ?? throw new ArgumentNullException(nameof(message));
+		//}
+
+		public SensorAction()
 		{
-			Name = name ?? throw new ArgumentNullException(nameof(name));
-			Code = code ?? throw new ArgumentNullException(nameof(code));
-			Value = value ?? throw new ArgumentNullException(nameof(value));
-			Message = message ?? throw new ArgumentNullException(nameof(message));
+
 		}
 
 		//Add Trigger method

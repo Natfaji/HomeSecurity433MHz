@@ -56,7 +56,7 @@ namespace ControlPanel
 
 		private static void CheckFile()
 		{
-			if (!File.Exists(_filePath))
+			if (!File.Exists(_filePath) || string.IsNullOrEmpty(File.ReadAllText(_filePath)))
 			{
 				File.WriteAllText(_filePath, "[]");
 			}
