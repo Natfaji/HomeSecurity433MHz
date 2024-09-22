@@ -32,7 +32,10 @@ namespace ControlPanel
 		{
 			if (_actionsByCode.TryGetValue(code, out ISensor sensor))
 			{
-				sensor.Trigger(code);
+				if (sensor.Trigger(code))
+				{
+					SensorLogController.Log(sensor.Id, code);
+				}
 			}
 			else
 			{
