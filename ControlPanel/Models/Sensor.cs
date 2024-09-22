@@ -60,7 +60,7 @@ namespace ControlPanel.Models
 		}
 
 		//Add Trigger method
-		public virtual void Trigger(string code)
+		public virtual bool Trigger(string code)
 		{
 			int index = Actions.FindIndex(a => a.Code == code);
 
@@ -71,7 +71,9 @@ namespace ControlPanel.Models
 				CurrentValue = sensorAction.Value;
 				LastTriggeredTime = DateTime.Now;
 				LastTriggeredAction = Actions[index];
+				return true;
 			}
+			return false;
 		}
 
 		public void AddSensorAction(ISensorAction action)
