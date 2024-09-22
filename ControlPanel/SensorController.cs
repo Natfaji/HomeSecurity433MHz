@@ -16,6 +16,8 @@ namespace ControlPanel
 			_actionsByCode = new Dictionary<string, ISensor>();
 
 			AddSensor(SensorDataController.GetSensors(), false);
+
+			ListenToData();
 		}
 
 		public static SensorController GetInstance()
@@ -107,6 +109,12 @@ namespace ControlPanel
 		public void SaveSensors()
 		{
 			SensorDataController.SaveSensors(_Sensors);
+		}
+
+		private void ListenToData()
+		{
+			SerialPortDataReader serialPortDataReader = new SerialPortDataReader();
+			serialPortDataReader.OnDataReceived += Trigger;
 		}
 	}
 }

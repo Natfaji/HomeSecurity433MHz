@@ -9,6 +9,7 @@ namespace ControlPanel
 	public static class SensorDataController
 	{
 		private static string _filePath = ConfigurationManager.AppSettings["JsonFilePath"];
+
 		private static readonly JsonSerializerOptions options = new JsonSerializerOptions
 		{
 			WriteIndented = true,

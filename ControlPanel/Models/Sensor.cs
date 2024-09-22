@@ -7,19 +7,6 @@ namespace ControlPanel.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		private string _currentValue { get; set; }
-		public string CurrentValue
-		{
-			get => _currentValue;
-			set
-			{
-				if (_currentValue != value)
-				{
-					_currentValue = value;
-					OnPropertyChanged(nameof(CurrentValue));
-				}
-			}
-		}
 		public List<ISensorAction> Actions { get; set; }
 		private DateTime _lastTriggeredTime { get; set; }
 		public DateTime LastTriggeredTime
@@ -68,7 +55,6 @@ namespace ControlPanel.Models
 			{
 				ISensorAction sensorAction = Actions[index];
 				sensorAction.Trigger();
-				CurrentValue = sensorAction.Value;
 				LastTriggeredTime = DateTime.Now;
 				LastTriggeredAction = Actions[index];
 				return true;
