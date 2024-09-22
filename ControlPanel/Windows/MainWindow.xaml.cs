@@ -4,10 +4,6 @@ using ControlPanel.Models.SensorTypes;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-
-//using System.Windows.Forms;
-//using System.Drawing;
 
 namespace ControlPanel.Windows
 {
@@ -96,11 +92,12 @@ namespace ControlPanel.Windows
 			if (state == true)
 			{
 				_notifyIcon.Visible = true;
-				ToastContentBuilder toastContentBuilder = new ToastContentBuilder();
-				toastContentBuilder.AddText("Application running");
-				toastContentBuilder.AddText("Home Security is still running in the background.");
-				toastContentBuilder.AddText("Check your system tray for more options.");
-				toastContentBuilder.Show();
+				//.AddAppLogoOverride(new Uri($"pack://application:,,,/images/close.png"))
+				new ToastContentBuilder()
+				.AddText("Application running")
+				.AddText("Home Security is still running in the background.")
+				.AddText("Check your system tray for more options.")
+				.Show();
 			}
 			else
 			{
@@ -143,7 +140,7 @@ namespace ControlPanel.Windows
 			// Trigger the action
 			if (yesorno)
 			{
-				sensorController.Trigger("01010101");
+				sensorController.Trigger("14292900");
 				yesorno = false;
 			}
 			else
